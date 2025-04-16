@@ -1,6 +1,5 @@
-dnf install rabbitmq-server -y
-
 cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
+dnf install rabbitmq-server -y
 
 systemctl enable rabbitmq-server
 systemctl start rabbitmq-server
