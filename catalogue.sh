@@ -1,11 +1,10 @@
-
 component_name=catalogue
 source common.sh
 
 nodejs
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+cp ${pwd}/mongo.repo /etc/yum.repos.d/mongo.repo
 dnf install mongodb-mongosh -y
-mongosh --host mongodb-dev.prashumps.online </app/db/master-data.js
+mongosh --host mongodb-dev.rdevopsb84.online </app/db/master-data.js
 
 systemd_setup
