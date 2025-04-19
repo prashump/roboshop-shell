@@ -3,8 +3,8 @@ if [ -z "${MYSQL_ROOT_PASSWORD}" -a -z "$1" ]; then
   exit 1
 fi
 
-if [ -n "${MYSQ_ROOT_PASSWORD}" ]; then
-  PASSWORD=${MYSQ_ROOT_PASSWORD}
+if [ -n "${MYSQL_ROOT_PASSWORD}" ]; then
+  PASSWORD=${MYSQL_ROOT_PASSWORD}
 fi
 
 if [ -n "$1" ]; then
@@ -15,5 +15,3 @@ dnf install mysql-server -y
 
 systemctl enable mysqld
 systemctl start mysqld
-
-mysql_secure_installation --set-root-pass $PASSWORD
