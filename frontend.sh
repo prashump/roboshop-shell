@@ -1,3 +1,5 @@
+component_name=frontend
+source common.sh
 
 dnf module disable nginx -y
 dnf module enable nginx:1.24 -y

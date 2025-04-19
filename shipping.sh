@@ -1,25 +1,17 @@
-dnf install maven -y
+set -e
 
-cp shipping.service /etc/systemd/system/shipping.service
+if [ -z "$1" ]; then
+  echo DB password is missing
+  exit 1
+fi
 
-useradd roboshop
-
-rm -rf /app
-mkdir /app
-curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip
-cd /app
-unzip /tmp/shipping.zip
-mvn clean package
-mv target/shipping-1.0.jar shipping.jar
-
-systemctl daemon-reload
-systemctl enable shipping
-systemctl start shipping
+component_name=shipping
+source common.sh
+java
 
 dnf install mysql -y
+for file in schema app-user master-data; do
+  mysql -h mysql-dev.prashumps.online -uroot -p"$1" < /app/db/${file}.sql
+done
 
-mysql -h mysql-dev.prashumps.online -uroot -pRoboShop@1 < /app/db/schema.sql
-mysql -h mysql-dev.prashumps.online -uroot -pRoboShop@1 < /app/db/app-user.sql
-mysql -h mysql-dev.prashumps.online -uroot -pRoboShop@1 < /app/db/master-data.sql
-
-systemctl restart shipping
+systemd_setup

@@ -1,3 +1,10 @@
+set -e
+
+if [ -z "$1" ]; then
+  echo input password missing
+  exit 1
+fi
+
 cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
 dnf install rabbitmq-server -y
 
