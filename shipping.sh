@@ -1,7 +1,7 @@
 set -e
 
 if [ -z "$1" ]; then
-  echo DB password is missing
+  echo Input DB password is missing
   exit 1
 fi
 
@@ -11,7 +11,7 @@ java
 
 dnf install mysql -y
 for file in schema app-user master-data; do
-  mysql -h mysql-dev.prashumps.online -uroot -p"$1" < /app/db/${file}.sql
+  mysql -h mysql-dev.rdevopsb84.online -uroot -p$1 < /app/db/$file.sql
 done
 
 systemd_setup
