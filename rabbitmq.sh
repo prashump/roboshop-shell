@@ -1,5 +1,3 @@
-set -e
-
 if [ -z "$1" ]; then
   echo input password missing
   exit 1
